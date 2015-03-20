@@ -2,6 +2,8 @@ Yii2 Gearman
 =======
 Component for use gearman server as consumer jobs
 
+UNDER DEVELOPMENT
+
 Usage
 =======
 
@@ -36,7 +38,6 @@ class MyJob implements perspectivain\gearman\InterfaceJob
         //do something
     }
 }
-
 ```
 
 
@@ -44,14 +45,12 @@ Register an job in your application
 
 ```
 perspectivain\gearman\BackgroundJob::register('MyJob', ['attributeA' => 10]);
-
 ```
 
 Run the worker
 
 ```
 # ./yii worker/run-one
-
 ```
 
 If your need continuous worker, use the crontab or the supervisor process control system (http://supervisord.org/).

@@ -1,0 +1,23 @@
+{
+    "name": "perspectivain/yii2-gearman",
+    "description": "Consumer for gearman server",
+    "keywords": ["php", "gearman", "yii2"],
+    "homepage": "https://github.com/perspectivain/yii2-gearman",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Juliano Baggio di Sopra", "email": "juliano@perspectiva.in"
+        }
+    ],
+    "support": {
+        "email": "juliano@perspectiva.in",
+        "issues": "https://github.com/perspectivain/yii2-gearman/issues",
+        "wiki": "https://github.com/perspectivain/yii2-gearman/wiki",
+        "source": "https://github.com/perspectivain/yii2-gearman"
+    },
+    "autoload": {
+        "psr-4": {
+            "perspectivain\\gearman\\": "src"
+        }
+    }
+}

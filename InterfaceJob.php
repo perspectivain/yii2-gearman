@@ -1,7 +1,10 @@
 <?php
-namespace perspectivain/yii-gearman;
+namespace perspectivain\gearman;
 
-interface InterfaceJob 
+interface InterfaceJob
 {
-	public function run(attributes);
+    /**
+     * @var array @attributes
+     */
+	public function run($attributes);
 }

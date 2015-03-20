@@ -1,16 +1,26 @@
 <?php
+namespace perspectivain\gearman;
 
-class Gearman extends CApplicationComponent
+class Gearman extends \yii\base\Component
 {
+    /**
+     * @var array
+     */
     public $servers;
+
+    /**
+     * @var GearmanClient
+     */
     protected $client;
+
+    /**
+     * @var GearmanWorker
+     */
     protected $worker;
 
-    public function init()
-    {
-        parent::init();
-    }
-
+    /**
+     * @return ??
+     */
     protected function setServers($instance)
     {
         foreach ($this->servers as $s) {
@@ -20,24 +30,29 @@ class Gearman extends CApplicationComponent
         return $instance;
     }
 
+    /**
+     * @return GearmanClient
+     */
     public function client()
     {
         if (!$this->client) {
-            $this->client = $this->setServers(new GearmanClient());
+            $this->client = $this->setServers(new GearmanClient);
         }
 
         return $this->client;
     }
 
+    /**
+     * @return GearmanWorker
+     */
     public function worker()
     {
         if (!$this->worker) {
-            $this->worker = $this->setServers(new GearmanWorker());
+            $this->worker = $this->setServers(new GearmanWorker);
         }
-        
+
         $this->worker->addOptions(GEARMAN_WORKER_GRAB_UNIQ);
 
         return $this->worker;
     }
-
 }

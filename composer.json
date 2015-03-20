@@ -15,6 +15,9 @@
         "wiki": "https://github.com/perspectivain/yii2-gearman/wiki",
         "source": "https://github.com/perspectivain/yii2-gearman"
     },
+    "require": {
+        "yiisoft/yii2": "*"
+    },
     "autoload": {
         "psr-4": {
             "perspectivain\\gearman\\": "src"

@@ -9,6 +9,11 @@ class Gearman extends \yii\base\Component
     public $servers;
 
     /**
+     * @var string
+     */
+    public $jobsNamespace;
+
+    /**
      * @var GearmanClient
      */
     protected $client;

@@ -4,9 +4,7 @@ Component for use gearman server as consumer jobs
 
 Deprecated if Yii2 Queue Component (https://github.com/yiisoft/yii2/issues/492) was accepted
 
-UNDER DEVELOPMENT
-
-Usage
+Simple Usage
 =======
 
 Register a component
@@ -24,6 +22,16 @@ Register a component
 ],
 ```
 
+Register a command controller
+
+```
+'controllerMap' => [
+    'worker' => [
+        'class' => 'perspectivain\gearman\WorkerController'
+    ],
+    ...
+]
+```
 
 Create an job class
 
@@ -46,16 +54,34 @@ class MyJob implements perspectivain\gearman\InterfaceJob
 Register an job in your application
 
 ```
-Yii::$app->gearman->register('MyJob', ['attributeA' => 10]);
+\perspectivain\gearman\BackgroundJob::register('GearmanJob', ['attributeA' => 10]);
 ```
 
 Run the worker
 
 ```
-# ./yii worker/run-one
+# php yii worker/run-one
 ```
 
 If your need continuous worker, use the crontab or the supervisor process control system (http://supervisord.org/).
+
+
+Multi queue Usage
+=======
+
+Register an job in your application
+
+```
+$queueName = 'newqueue';
+\perspectivain\gearman\BackgroundJob::register('GearmanJob', ['attributeA' => 10], \perspectivain\gearman\BackgroundJob::NORMAL, $queueName);
+```
+
+Run the worker
+
+```
+# php yii worker/run-one --path=newqueue
+```
+
 
 Installing
 ======

@@ -1,15 +1,16 @@
 <?php
 
-namespace perspectivain/yii-gearman;
+namespace perspectivain\gearman;
 
-class WorkeQueuerCommand extends CConsoleCommand 
+use Yii;
+
+class WorkerController extends yii\console\Controller
 {
-
 	/**
 	 * Run one job on queue
 	 * @return void
-	 */	
-	public function actionRunOne() 
+	 */
+	public function actionRunOne()
 	{
 		$worker = BackgroundJob::worker();
 		$worker->setTimeout(30000);
@@ -17,29 +18,27 @@ class WorkeQueuerCommand extends CConsoleCommand
 			$worker->work();
 		} catch (ErrorException $e) {}
 	}
-	
+
 	/**
 	 * Run all queue
 	 * @param string $path
 	 * @return void
-	 */	
-	public function actionRunAll($path = null) 
+	 */
+	public function actionRunAll($path = null)
 	{
 		$worker = BackgroundJob::worker($path);
-		while($worker->work()) { 
-  
+		while($worker->work()) {
+
 		}
 	}
-	
+
 	/**
 	 * Clear one job
 	 * @return void
-	 */	
+	 */
 	public function actionClearOne()
 	{
 		$worker = BackgroundJob::workerClearQueue();
 		$worker->work();
 	}
 }
-
-?>

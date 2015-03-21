@@ -1,6 +1,8 @@
 <?php
 namespace perspectivain\gearman;
 
+use Yii;
+
 class BackgroundJob
 {
     const LOW = 0;
@@ -11,7 +13,6 @@ class BackgroundJob
 
     /**
     * Send an job to queue
-    * Example: BackgroundJob::client('SendMailJob', ['subject' => 'Gearman', 'email' => 'rob@erval.com'], BackgroundJob::HIGH);
     * @param string $class
     * @param array $params
     * @param integer $priority
@@ -24,20 +25,20 @@ class BackgroundJob
             self::setPath($path);
         }
 
-        $client = Yii::app()->gearman->client();
+        $client = Yii::$app->gearman->client();
 
         switch ($priority) {
 
             case self::HIGH:
-                $client->doHighBackground(self::getPath(), serialize(['class' => $classe, 'params' => $params]));
+                $client->doHighBackground(self::getPath(), serialize(['class' => $class, 'params' => $params]));
             break;
 
             case self::LOW:
-                $client->doLowBackground(self::getPath(), serialize(['classe' => $classe, 'params' => $params]));
+                $client->doLowBackground(self::getPath(), serialize(['class' => $class, 'params' => $params]));
             break;
 
             default:
-                $client->doBackground(self::getPath(), serialize(['classe' => $classe, 'params' => $params]));
+                $client->doBackground(self::getPath(), serialize(['class' => $class, 'params' => $params]));
             break;
         }
 
@@ -49,14 +50,14 @@ class BackgroundJob
     * @param string $path
     * @return worker
     */
-    public static function worker($path)
+    public static function worker($path = null)
     {
         if($path) {
             self::setPath($path);
         }
 
         $worker = Yii::$app->gearman->worker();
-        $worker->addFunction(self::getPath(), ['BackgroundJob', 'processar']);
+        $worker->addFunction(self::getPath(), ['\perspectivain\gearman\BackgroundJob', 'run']);
         return $worker;
     }
 
@@ -79,7 +80,7 @@ class BackgroundJob
     public static function run($job)
     {
         $attributes = unserialize($job->workload());
-        $className = $attributes['class'];
+        $className = Yii::$app->gearman->jobsNamespace . $attributes['class'];
         $model = new $className;
         $model->run($attributes['params']);
         return;

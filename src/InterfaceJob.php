@@ -6,5 +6,5 @@ interface InterfaceJob
     /**
      * @var array @attributes
      */
-	public function run($attributes);
+    public function run($attributes);
 }

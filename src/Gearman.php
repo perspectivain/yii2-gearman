@@ -24,7 +24,7 @@ class Gearman extends \yii\base\Component
     protected $worker;
 
     /**
-     * @return ??
+     * @return Object
      */
     protected function setServers($instance)
     {
@@ -41,7 +41,7 @@ class Gearman extends \yii\base\Component
     public function client()
     {
         if (!$this->client) {
-            $this->client = $this->setServers(new GearmanClient);
+            $this->client = $this->setServers(new \GearmanClient);
         }
 
         return $this->client;
@@ -53,7 +53,7 @@ class Gearman extends \yii\base\Component
     public function worker()
     {
         if (!$this->worker) {
-            $this->worker = $this->setServers(new GearmanWorker);
+            $this->worker = $this->setServers(new \GearmanWorker);
         }
 
         $this->worker->addOptions(GEARMAN_WORKER_GRAB_UNIQ);

@@ -18,6 +18,9 @@
     "require": {
         "yiisoft/yii2": "*"
     },
+    "suggest": {
+        "ext-gearman": "This library needs Gearman"
+    },
     "autoload": {
         "psr-4": {
             "perspectivain\\gearman\\": "src"

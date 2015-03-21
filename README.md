@@ -79,7 +79,7 @@ $queueName = 'newqueue';
 Run the worker
 
 ```
-# php yii worker/run-one --path=newqueue
+# php yii worker/run-one newqueue
 ```
 
 

@@ -10,9 +10,9 @@ class WorkerController extends yii\console\Controller
 	 * Run one job on queue
 	 * @return void
 	 */
-	public function actionRunOne()
+	public function actionRunOne($path = null)
 	{
-		$worker = BackgroundJob::worker();
+		$worker = BackgroundJob::worker($path);
 		$worker->setTimeout(30000);
 		try {
 			$worker->work();

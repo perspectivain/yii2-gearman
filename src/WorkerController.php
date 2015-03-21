@@ -3,8 +3,9 @@
 namespace perspectivain\gearman;
 
 use Yii;
+use yii\console\Controller;
 
-class WorkerController extends yii\console\Controller
+class WorkerController extends Controller
 {
 	/**
 	 * Run one job on queue
@@ -30,15 +31,5 @@ class WorkerController extends yii\console\Controller
 		while($worker->work()) {
 
 		}
-	}
-
-	/**
-	 * Clear one job
-	 * @return void
-	 */
-	public function actionClearOne()
-	{
-		$worker = BackgroundJob::workerClearQueue();
-		$worker->work();
 	}
 }

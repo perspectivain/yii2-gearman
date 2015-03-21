@@ -13,7 +13,7 @@ Register a component
 'components' => [
     'gearman' => [
         'class' => 'perspectivain\gearman\Gearman',
-        'jobsNamespace' => 'app/jobs',
+        'jobsNamespace' => '\app\jobs\\',
         'servers' => [
             ['host' => GEARMAN_SERVER_HOST, 'port' => GEARMAN_SERVER_PORT],
         ],
